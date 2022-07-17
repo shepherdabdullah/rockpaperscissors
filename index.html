@@ -1,0 +1,86 @@
+<script>
+    //global stuff and tingz//
+    var choice = ["rock", "paper", "scissors"];
+    let playerScore = 0;
+    let computerScore = 0;
+    let playerSelection = "";
+    let computerSelection = "";
+
+
+
+    function playRound(playerSelection, computerSelection) {
+        // give random selection from choice array
+        function getComputerChoice() {
+        let computerChoice = Math.floor(Math.random() * choice.length);
+        return choice[computerChoice];
+    }
+        // computer gets their choice from function call and stores in variable/arg for playRound function
+        computerSelection = getComputerChoice();
+        // player makes their choice
+        let playerChoice = prompt("Pick 'rock', 'paper', or 'scissors'").toLowerCase();
+        // assign playerChoice to playerSelection argument
+        playerSelection = playerChoice;
+        // outcomes for playerSelection rock
+        if (playerSelection == "rock") {
+            if (computerSelection == "rock") {
+                console.log("The round was a draw! You both picked rock");
+            }
+            else if (computerSelection == "paper") {
+                console.log("You lost the round! Your rock was covered by opponent's paper");
+                computerScore++;
+            }
+            else {
+                console.log("You won the round! Your rock crushed opponent's scissors");
+                playerScore++;
+            }
+        // outcomes for playerSelection paper    
+        } else if (playerSelection == "paper") {
+            if (computerSelection == "paper") {
+                console.log("The round was a draw! You both picked paper");
+            }
+            else if (computerSelection == "scissors") {
+                console.log("You lost the round! Your paper was cut by opponent's scissors");
+                computerScore++;
+            }
+            else {
+                console.log("You won the round! Your paper covered opponent's rock");
+                playerScore++;
+            }
+        // outcomes for playerSelection scissors    
+        } else if (playerSelection == "scissors") {
+            if (computerSelection == "scissors") {
+                console.log("The round was a draw! You both picked scissors");
+            }
+            else if (computerSelection == "rock") {
+                console.log("You lost the round! Your scissors were crushed by opponent's rock");
+                computerScore++;
+            }
+            else {
+                console.log("You won the round! Your scissors cut opponent's paper");
+                playerScore++;
+            } 
+        }
+        // outcome if playerSelection != anything in the choice array
+        else {
+            console.log("Invalid entry! Valid entries ONLY include 'rock', 'paper', or 'scissors' and are case insensitive!")
+        }
+    }
+    
+
+    function playGame() {
+        // run 5 rounds of RPS and determine winner based on scores at the end of 5 rounds
+        for (let i = 0; i < 5; i++) {
+            playRound(playerSelection, computerSelection);
+        }
+        if (playerScore > computerScore) {
+            console.log("You won the game! Your Score: " + playerScore + " Computer Score: " + computerScore + "");
+        } else if (playerScore == computerScore) {
+            console.log("The game ended in a draw! Your score: " + playerScore + " Computer Score: " + computerScore + "");
+        } else {
+            console.log("You lost the game! Your score: " + playerScore + " Computer Score: " + computerScore + "");
+        }
+    }
+    playGame();
+
+
+</script>
